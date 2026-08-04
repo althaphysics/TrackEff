@@ -87,3 +87,15 @@ TrackEff includes utilities for visualizing
 - crossed cells.
 
 
+# Citation
+
+If you use TrackEff in your work, please cite the software release and the accompanying publication.
+
+## Software
+
+Zenodo https://doi.org/10.5281/zenodo.14587061
+
+## Publication
+E. Betholet, A. Soffer. Estimating the track-reconstruction efficiency in phenomenological proposals of long-lived-particle searches
+
+https://www.worldscientific.com/doi/10.1142/S0217751X25500320
