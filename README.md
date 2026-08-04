@@ -1,18 +1,84 @@
 # TrackEff
 
-This package provides a way to estimate the number of hits deposited by a charged track passing through the Central Drift Chamber (CDC) of the Belle II detector.
+TrackEff is a lightweight Python package for estimating the number of hits deposited by a charged track passing through the Central Drift Chamber (CDC) of the Belle II detector.
 
-From the 3-momenta, charged, and production vertex of a given track, the software computes the trajectory of the particle in the magnetic field of the detector. Then, using a simplified version of the CDC, it evaluates the number of CDC hits associated to this track.
+Given the particle charge, three-momentum, and production vertex, TrackEff propagates the particle through the detector magnetic field using a helical trajectory model and estimates the number of CDC hits using a simplified detector geometry.
+
+This implementation has been significantly redesigned compared to version 1.1.1:
+
+- Numba JIT compilation for high-performance track propagation.
+- Vectorized calculations using NumPy whenever possible.
+- Pre-computed lookup tables for fast layer and cell identification.
+- Single-pass hit counting to minimize memory allocations and improve execution speed.
+
+These improvements make the package suitable for processing large samples of simulated tracks while preserving the same physics model.
 
 # Installation
 
-This package uses comon python librairies suchs as numpy, pandas, scipy and matplotlib.
+This package uses the following Python Packages:
 
-# Usage
+- numpy
+- pandas
+- scipy
+- matplotlib
+- numba
 
-For a quick start, use the ```simple_example.ipynb``` notebook.
+~~~
+pip install numpy scipy pandas matplotlib numba
+~~~
 
-The file ``track_propagation_in_CDC.py`` contains all the classes and methods that are used to compute the trajectory of charged particles and the number of hits in the CDC.
+# Quick Start
+
+The easiest way to learn the package is through the notebook ```simple_example.ipynb```.
+
+# Basic Usage
+
+## 1. Create a detector model
+
+A CDC object describes the detector geometry.
+
+Using an empty dictionary loads the default geometry based on the Belle II Technical Design Report (TDR).
+
+~~~python
+cdc = CDC({})
+~~~
+
+Detector parameters can be modified by supplying a configuration dictionary.
+
+## 2. Define a particle
+
+~~~python
+track = {
+    "q": 1,
+    "px": 1.10,
+    "py": 0.89,
+    "pz": -0.29,
+    "prodVtxX": 4.39,
+    "prodVtxY": 3.21,
+    "prodVtxZ": -1.27
+}
+~~~
+
+## 3. Propagate the trajectory
+
+~~~python
+traj = Trajectory(
+    track,
+    cdc,
+    step_size=0.1
+)
+~~~
+
+The trajectory object computes the particle path and stores the propagated points together with the corresponding detector information.
+
+The estimated number of CDC hits is available through
+
+~~~python
+traj.CDChits
+~~~
+
+
+<!-- The file ``track_propagation_in_CDC.py`` contains all the classes and methods that are used to compute the trajectory of charged particles and the number of hits in the CDC.
 
 The inputs to configure the different objects are given as dictionaries.
 
@@ -38,4 +104,4 @@ trk1 = Trajectory(d_trk1, cdc, step=0.1)
 nCDCHits = trk1.CDChits
 ~~~
 
-It is also possible to make some plots of the tracks, see the examples in ```simple_example.ipynb```.
+It is also possible to make some plots of the tracks, see the examples in ```simple_example.ipynb```. -->
