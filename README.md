@@ -4,6 +4,9 @@ This package provides a way to estimate the number of hits deposited by a charge
 
 From the 3-momenta, charged, and production vertex of a given track, the software computes the trajectory of the particle in the magnetic field of the detector. Then, using a simplified version of the drift chambers, it evaluates the number of hits associated to this track.
 
+## Updates and Extensions
+The original TrackEff code has been extended to support the BESIII and proposed STCF drift chambers, in addition to Belle II. The track propagation framework has also been generalized to accommodate the detector geometries of all three experiments. Details of these modifications and extensions are provided in `CHANGELOG.md`.
+
 # Installation
 
 This package uses common python librairies suchs as numpy, pandas, scipy and matplotlib.
