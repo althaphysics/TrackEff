@@ -62,9 +62,9 @@ These correspond to the cell size of the innermost and outermost layers of each 
 
 For detectors with non-uniform cell sizes:
 
-\[
+$$
 \text{rhosize} = \text{rhosize}_{\min} + j \times \Delta \rho
-\]
+$$
 
 where:
 
@@ -72,11 +72,11 @@ where:
 - `j`: Layer index within the superlayer.
 - \(\Delta \rho\):
 
-\[
+$$
 \Delta \rho =
 \frac{\text{rhosize}_{\max}-\text{rhosize}_{\min}}
 {n_{\text{layers}}-1}
-\]
+$$
 
 ### 5. Cell Size Threshold
 
